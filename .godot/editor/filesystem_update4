@@ -1,5 +1,7 @@
-res://scenes/Main.tscn
+res://prefabs/Bean.tscn
 res://Main.gdshader
+res://scripts/Bean.gd
+res://scenes/Main.tscn
 res://prefabs/Player.tscn
 res://scenes/UI.tscn
-res://prefabs/Bean.tscn
+res://scripts/Player.gd
