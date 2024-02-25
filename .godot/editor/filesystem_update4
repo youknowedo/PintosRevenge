@@ -1,0 +1,6 @@
+res://scenes/Main.tscn
+res://Main.gdshader
+res://prefabs/Player.tscn
+res://scenes/UI.tscn
+res://scripts/Bean.gd
+res://prefabs/Bean.tscn
