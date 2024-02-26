@@ -1,6 +1,6 @@
 extends Area2D
 
-const SPEED = 100
+const SPEED = 200
 
 @export var playerSpeed: int
 @export var timeAlive = 5

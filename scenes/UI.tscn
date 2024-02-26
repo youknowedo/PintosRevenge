@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://dhgtjbswik58w"]
+[gd_scene load_steps=3 format=3 uid="uid://dhgtjbswik58w"]
+
+[ext_resource type="Texture2D" uid="uid://bg5t6msd8a5px" path="res://sprites/cursor.png" id="1_eftfb"]
+[ext_resource type="Script" path="res://scripts/Cursor.gd" id="2_wy24j"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -8,11 +11,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-ratio = 1.219
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(256, 2.08165e-12)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="Cursor" type="Sprite2D" parent="."]
+position = Vector2(125, 104)
+texture = ExtResource("1_eftfb")
+script = ExtResource("2_wy24j")

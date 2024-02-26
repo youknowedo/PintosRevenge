@@ -514,6 +514,7 @@ following = NodePath("../Player")
 [node name="Camera2D" type="Camera2D" parent="PixelPerfectCamera"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource("4_t52t4")]
 
