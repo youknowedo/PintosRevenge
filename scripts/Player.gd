@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal health_changed(new_health: int)
+
 const bean = preload ("res://prefabs/Bean.tscn")
 
 const SPEED = 75
@@ -13,8 +15,16 @@ const SPEED = 75
 @onready var sprite = $Sprite2D
 @onready var main = get_node("/root/Main/Beans")
 
+var health = 100
 var tile_on_top = false
 var tile_on_bottom = false
+
+func _ready():
+	health_changed.emit(health_changed)
+
+func change_health(amount: int):
+	health += amount
+	health_changed.emit(health)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("fire"):
