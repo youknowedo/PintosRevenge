@@ -43,26 +43,53 @@ func _physics_process(_delta):
 
 func _on_bottom_tile_detector_body_entered(body: Node2D):
 	if body is TileMap&&!tile_on_top:
+		print("entered bottom")
 		tile_on_bottom = true
 		bottom_tile_collider.set_deferred("disabled", true)
 		top_detector_collider.set_deferred("disabled", true)
 		z_index = 3
 
+func _on_bottom_tile_inner_detector_body_entered(body: Node2D):
+	if body is TileMap&&!tile_on_top:
+		print("inner bottom")
+		bottom_detector_collider.set_deferred("disabled", true)
+	
 func _on_bottom_tile_detector_body_exited(body: Node2D):
 	if body is TileMap:
+		print("exited bottom" + body.name)
 		tile_on_bottom = false
 		bottom_tile_collider.set_deferred("disabled", false)
+		bottom_detector_collider.set_deferred("disabled", false)
 		top_detector_collider.set_deferred("disabled", false)
 		z_index = 5
-
+	
 func _on_top_tile_detector_body_entered(body: Node2D):
 	if body is TileMap&&!tile_on_bottom:
+		print("entered top")
 		tile_on_top = true
 		top_tile_collider.set_deferred("disabled", true)
 		bottom_detector_collider.set_deferred("disabled", true)
 
+func _on_top_tile_inner_detector_body_entered(body: Node2D):
+	if body is TileMap&&!tile_on_bottom:
+		print("inner top")
+		top_detector_collider.set_deferred("disabled", true)
+
 func _on_top_tile_detector_body_exited(body: Node2D):
 	if body is TileMap:
+		print("exited top")
 		tile_on_top = false
 		top_tile_collider.set_deferred("disabled", false)
+		top_detector_collider.set_deferred("disabled", false)
 		bottom_detector_collider.set_deferred("disabled", false)
+
+func _on_tile_exit_detector_body_exited(body):
+	if body is TileMap:
+		print("exited exit")
+		tile_on_top = false
+		tile_on_bottom = false
+		top_tile_collider.set_deferred("disabled", false)
+		bottom_tile_collider.set_deferred("disabled", false)
+		top_detector_collider.set_deferred("disabled", false)
+		bottom_detector_collider.set_deferred("disabled", false)
+		z_index = 5
