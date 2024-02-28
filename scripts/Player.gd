@@ -33,6 +33,7 @@ func _process(_delta):
 		b.playerSpeed = SPEED
 
 		main.add_child(b)
+		change_health( - 2)
 
 func _physics_process(_delta):
 	var movement = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

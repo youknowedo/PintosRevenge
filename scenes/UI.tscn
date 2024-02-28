@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhgtjbswik58w"]
+[gd_scene load_steps=5 format=3 uid="uid://dhgtjbswik58w"]
 
 [ext_resource type="Texture2D" uid="uid://bg5t6msd8a5px" path="res://sprites/cursor.png" id="1_eftfb"]
+[ext_resource type="Texture2D" uid="uid://cfw7yhs2jw7sn" path="res://sprites/HUD.png" id="1_fgb24"]
+[ext_resource type="FontFile" uid="uid://bc1q1omdl21ml" path="res://sprites/5×5.ttf" id="2_jdph4"]
 [ext_resource type="Script" path="res://scripts/Cursor.gd" id="2_wy24j"]
 
 [node name="Control" type="Control"]
@@ -27,6 +29,26 @@ color = Color(0, 0, 0, 1)
 [node name="Control" type="Control" parent="HBoxContainer"]
 custom_minimum_size = Vector2(256, 2.08165e-12)
 layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_fgb24")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Control"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 15.0
+offset_right = 78.0
+offset_bottom = 26.0
+theme_override_fonts/normal_font = ExtResource("2_jdph4")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "[center] 100 [/center]"
 
 [node name="ColorRect2" type="ColorRect" parent="HBoxContainer"]
 layout_mode = 2

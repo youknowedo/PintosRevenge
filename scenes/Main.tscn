@@ -1,9 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://btpwj2yl485jy"]
+[gd_scene load_steps=13 format=3 uid="uid://btpwj2yl485jy"]
 
+[ext_resource type="Texture2D" uid="uid://cfw7yhs2jw7sn" path="res://sprites/HUD.png" id="2_cvg2j"]
+[ext_resource type="Script" path="res://scenes/Health.gd" id="3_mwuo1"]
+[ext_resource type="FontFile" uid="uid://bc1q1omdl21ml" path="res://sprites/5×5.ttf" id="4_hlwg1"]
 [ext_resource type="Texture2D" uid="uid://bjy2g6iu3gq28" path="res://sprites/cave.png" id="4_m17v8"]
 [ext_resource type="PackedScene" uid="uid://cd3jnd03x6544" path="res://prefabs/Player.tscn" id="4_q5lns"]
-[ext_resource type="PackedScene" uid="uid://dhgtjbswik58w" path="res://scenes/UI.tscn" id="4_t52t4"]
 [ext_resource type="Script" path="res://scripts/PixelPerfectCamera.gd" id="5_be3mr"]
+[ext_resource type="Texture2D" uid="uid://bg5t6msd8a5px" path="res://sprites/cursor.png" id="5_hx3tf"]
+[ext_resource type="Script" path="res://scripts/Cursor.gd" id="6_av4c8"]
+
+[sub_resource type="Gradient" id="Gradient_xk2n5"]
+colors = PackedColorArray(0.698039, 0.0627451, 0.188235, 1, 0.698039, 0.0627451, 0.188235, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vf8oe"]
+gradient = SubResource("Gradient_xk2n5")
+width = 60
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_scpv2"]
 texture = ExtResource("4_m17v8")
@@ -516,7 +527,78 @@ following = NodePath("../Player")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="Control" parent="CanvasLayer" instance=ExtResource("4_t52t4")]
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(256, 2.08165e-12)
+layout_mode = 2
+
+[node name="HUD" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cvg2j")
+
+[node name="Health" type="Control" parent="CanvasLayer/Control/HBoxContainer/Control"]
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 70.0
+offset_bottom = 17.0
+script = ExtResource("3_mwuo1")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/Control/HBoxContainer/Control/Health"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture1D_vf8oe")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/HBoxContainer/Control/Health"]
+layout_mode = 0
+offset_top = -3.0
+offset_right = 64.0
+offset_bottom = 8.0
+theme_override_fonts/normal_font = ExtResource("4_hlwg1")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "[center] 100 [/center]"
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="Cursor" type="Sprite2D" parent="CanvasLayer/Control"]
+position = Vector2(125, 104)
+texture = ExtResource("5_hx3tf")
+script = ExtResource("6_av4c8")
 
 [node name="Beans" type="Node2D" parent="."]
 
@@ -530,3 +612,5 @@ layer_0/tile_data = PackedInt32Array(1376298, 262146, 1, 1310762, 2, 1, 1245226,
 
 [node name="Player" parent="." instance=ExtResource("4_q5lns")]
 position = Vector2(0.9, 0.5)
+
+[connection signal="health_changed" from="Player" to="CanvasLayer/Control/HBoxContainer/Control/Health" method="_on_player_health_changed"]
