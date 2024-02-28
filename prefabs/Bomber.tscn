@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=3 uid="uid://bomptenogmh5d"]
+
+[ext_resource type="Script" path="res://prefabs/Bomber.gd" id="1_jyx2g"]
+[ext_resource type="Texture2D" uid="uid://bbwyq6weefgyi" path="res://sprites/bomber.png" id="1_mgi7n"]
+[ext_resource type="PackedScene" uid="uid://r2w3hq2m7yrv" path="res://prefabs/TileDetectors.tscn" id="3_sqpuj"]
+
+[sub_resource type="Animation" id="Animation_ob33c"]
+resource_name = "IDLE"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bomber:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(3, 0), Vector2i(4, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p1yxq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bomber:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8jlgs"]
+resource_name = "ROLL"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bomber:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8755s"]
+_data = {
+"IDLE": SubResource("Animation_ob33c"),
+"RESET": SubResource("Animation_p1yxq"),
+"ROLL": SubResource("Animation_8jlgs")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8j8j"]
+size = Vector2(14, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_elknj"]
+size = Vector2(14, 6)
+
+[node name="Bomber" type="CharacterBody2D"]
+z_as_relative = false
+script = ExtResource("1_jyx2g")
+
+[node name="Bomber" type="Sprite2D" parent="."]
+texture = ExtResource("1_mgi7n")
+hframes = 5
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8755s")
+}
+
+[node name="Top" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_r8j8j")
+
+[node name="Bottom" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_elknj")
+
+[node name="TileDetectors" parent="." instance=ExtResource("3_sqpuj")]

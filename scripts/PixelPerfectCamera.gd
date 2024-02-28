@@ -1,6 +1,6 @@
 extends Node2D
  
-enum PanState { FIXED, NARROW, WIDE }
+enum PanState {FIXED, NARROW, WIDE}
  
 @onready var camera = $Camera2D
  
@@ -23,7 +23,6 @@ var pan_state: PanState:
 	set(value):
 		pan_state = value
  
- 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if following == null:
@@ -31,7 +30,7 @@ func _process(delta):
 		
 	if pan_state == PanState.FIXED:
 		position = following.position
-		return 
+		return
 	
 	var delta_offset = target_offset - offset
 	if delta_offset.length() > 1.0:
@@ -39,14 +38,14 @@ func _process(delta):
 		var v = delta * 200.0
 		if delta_offset.x > v:
 			offset.x += v
-		elif delta_offset.x < -v:
+		elif delta_offset.x < - v:
 			offset.x -= v
 		else:
 			offset.x = target_offset.x
 		
 		if delta_offset.y > v:
 			offset.y += v
-		elif delta_offset.y < -v:
+		elif delta_offset.y < - v:
 			offset.y -= v
 		else:
 			offset.y = target_offset.y
@@ -61,7 +60,7 @@ func _process(delta):
 			current_global_pos = global_position
 			
 		var pos_delta = virtual_target - current_global_pos
-		var panning = false 
+		var panning = false
 		match pan_state:
 			PanState.WIDE:
 				if absf(pos_delta.x) >= 60.0 or absf(pos_delta.y) >= 40.0:
@@ -87,12 +86,10 @@ func _process(delta):
 			current_global_pos = new_pos
 			global_position = new_pos
  
- 
-func keep_visible(current_pos: Vector2, keep_visible: Vector2) -> Vector2:
-	current_pos.x = clampf(current_pos.x, keep_visible.x - self.box_radius.x, keep_visible.x + self.box_radius.x)
-	current_pos.y = clampf(current_pos.y, keep_visible.y - self.box_radius.y, keep_visible.y + self.box_radius.y)
+func keep_visible(current_pos: Vector2, _keep_visible: Vector2) -> Vector2:
+	current_pos.x = clampf(current_pos.x, _keep_visible.x - self.box_radius.x, _keep_visible.x + self.box_radius.x)
+	current_pos.y = clampf(current_pos.y, _keep_visible.y - self.box_radius.y, _keep_visible.y + self.box_radius.y)
 	return current_pos
- 
  
 func follow(node: Node2D) -> void:
 	pan_state = PanState.WIDE
@@ -100,11 +97,8 @@ func follow(node: Node2D) -> void:
 	global_position = node.global_position
 	camera.current = true
  
- 
 func set_offset(_offset: Vector2) -> void:
 	offset = _offset
  
- 
 func clear_offset() -> void:
 	set_offset(Vector2.ZERO)
- 

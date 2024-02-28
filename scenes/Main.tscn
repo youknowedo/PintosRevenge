@@ -1,14 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://btpwj2yl485jy"]
+[gd_scene load_steps=15 format=3 uid="uid://btpwj2yl485jy"]
 
 [ext_resource type="Texture2D" uid="uid://cfw7yhs2jw7sn" path="res://sprites/HUD.png" id="2_cvg2j"]
-[ext_resource type="Script" path="res://scenes/Health.gd" id="3_mwuo1"]
+[ext_resource type="Script" path="res://scripts/Health.gd" id="3_mwuo1"]
 [ext_resource type="FontFile" uid="uid://bc1q1omdl21ml" path="res://sprites/5×5.ttf" id="4_hlwg1"]
 [ext_resource type="Texture2D" uid="uid://bjy2g6iu3gq28" path="res://sprites/cave.png" id="4_m17v8"]
 [ext_resource type="PackedScene" uid="uid://cd3jnd03x6544" path="res://prefabs/Player.tscn" id="4_q5lns"]
 [ext_resource type="Script" path="res://scripts/PixelPerfectCamera.gd" id="5_be3mr"]
 [ext_resource type="Texture2D" uid="uid://bg5t6msd8a5px" path="res://sprites/cursor.png" id="5_hx3tf"]
 [ext_resource type="Script" path="res://scripts/Cursor.gd" id="6_av4c8"]
-[ext_resource type="PackedScene" uid="uid://bwfg2vwo2l1ua" path="res://prefabs/Puddle.tscn" id="9_g8wjq"]
+[ext_resource type="PackedScene" path="res://prefabs/Puddle.tscn" id="9_g8wjq"]
+[ext_resource type="PackedScene" uid="uid://bomptenogmh5d" path="res://prefabs/Bomber.tscn" id="10_p7wge"]
 
 [sub_resource type="Gradient" id="Gradient_xk2n5"]
 colors = PackedColorArray(0.698039, 0.0627451, 0.188235, 1, 0.698039, 0.0627451, 0.188235, 1)
@@ -617,5 +618,8 @@ position = Vector2(0.9, 0.5)
 
 [node name="Puddle" parent="." instance=ExtResource("9_g8wjq")]
 position = Vector2(27, -33)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("10_p7wge")]
+position = Vector2(-49, -31)
 
 [connection signal="health_changed" from="Player" to="CanvasLayer/Control/HBoxContainer/Control/Health" method="_on_player_health_changed"]
