@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://r2w3hq2m7yrv"]
 
-[ext_resource type="Script" path="res://prefabs/TileDetectors.gd" id="1_vmycg"]
+[ext_resource type="Script" path="res://scripts/TileDetectors.gd" id="1_2omd1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_njmuw"]
 size = Vector2(16, 16)
@@ -18,7 +18,7 @@ size = Vector2(16, 6)
 size = Vector2(14, 6)
 
 [node name="TileDetectors" type="Node2D"]
-script = ExtResource("1_vmycg")
+script = ExtResource("1_2omd1")
 
 [node name="Exit" type="Area2D" parent="."]
 

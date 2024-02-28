@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bomptenogmh5d"]
 
-[ext_resource type="Script" path="res://prefabs/Bomber.gd" id="1_jyx2g"]
+[ext_resource type="Script" path="res://scripts/Bomber.gd" id="1_jyx2g"]
 [ext_resource type="Texture2D" uid="uid://bbwyq6weefgyi" path="res://sprites/bomber.png" id="1_mgi7n"]
 [ext_resource type="PackedScene" uid="uid://r2w3hq2m7yrv" path="res://prefabs/TileDetectors.tscn" id="3_sqpuj"]
 
