@@ -41,11 +41,14 @@ _data = {
 "WALK": SubResource("Animation_55duq")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f10xc"]
-size = Vector2(16, 14)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mhxa8"]
 size = Vector2(16, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_opgha"]
+size = Vector2(16, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f10xc"]
+size = Vector2(16, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_birrh"]
 size = Vector2(18, 5)
@@ -53,25 +56,17 @@ size = Vector2(18, 5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rf231"]
 size = Vector2(16, 4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_opgha"]
-size = Vector2(16, 6)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tytdr"]
 size = Vector2(18, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qq04u"]
 size = Vector2(16, 5)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation", "top_tile_collider", "top_detector_collider", "bottom_tile_collider", "bottom_detector_collider")]
+[node name="Player" type="CharacterBody2D"]
 z_index = 3
 z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("2_0kev0")
-animation = NodePath("Sprite2D/AnimationPlayer")
-top_tile_collider = NodePath("TopTileCollider")
-top_detector_collider = NodePath("TopTileOuterDetector/CollisionShape2D")
-bottom_tile_collider = NodePath("BottomTileCollider")
-bottom_detector_collider = NodePath("BottomTileOuterDetector/CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 3
@@ -84,15 +79,19 @@ libraries = {
 "": SubResource("AnimationLibrary_6p86i")
 }
 
+[node name="TopTileCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_mhxa8")
+
+[node name="BottomTileCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_opgha")
+
 [node name="TileExitDetector" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileExitDetector"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_f10xc")
-
-[node name="TopTileCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3.5)
-shape = SubResource("RectangleShape2D_mhxa8")
 
 [node name="TopTileOuterDetector" type="Area2D" parent="."]
 
@@ -105,10 +104,6 @@ shape = SubResource("RectangleShape2D_birrh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopTileInnerDetector"]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_rf231")
-
-[node name="BottomTileCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
-shape = SubResource("RectangleShape2D_opgha")
 
 [node name="BottomTileOuterDetector" type="Area2D" parent="."]
 

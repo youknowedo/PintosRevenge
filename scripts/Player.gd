@@ -1,21 +1,30 @@
 extends CharacterBody2D
+class_name Player
 
 signal health_changed(new_health: int)
 
 const bean = preload ("res://prefabs/Bean.tscn")
 
-const SPEED = 75
-
-@export var animation: AnimationPlayer
-@export var top_tile_collider: CollisionShape2D
-@export var top_detector_collider: CollisionShape2D
-@export var bottom_tile_collider: CollisionShape2D
-@export var bottom_detector_collider: CollisionShape2D
-
-@onready var sprite = $Sprite2D
 @onready var main = get_node("/root/Main/Beans")
 
-var health = 100
+@onready var sprite = $Sprite2D
+@onready var animation: AnimationPlayer = $Sprite2D/AnimationPlayer
+@onready var top_tile_collider: CollisionShape2D = $TopTileCollider
+@onready var top_detector_collider: CollisionShape2D = $TopTileOuterDetector/CollisionShape2D
+@onready var bottom_tile_collider: CollisionShape2D = $BottomTileCollider
+@onready var bottom_detector_collider: CollisionShape2D = $BottomTileOuterDetector/CollisionShape2D
+
+@export var max_health = 100
+@export var speed = 75
+
+@export_group("Attack")
+@export var attack_damage = 10
+@export var attack_cooldown = 0.1
+@export var attack_self_damage = 2
+
+var health = max_health
+
+var can_attack = true
 var tile_on_top = false
 var tile_on_bottom = false
 
@@ -24,21 +33,30 @@ func _ready():
 
 func change_health(amount: int):
 	health += amount
+	if health > max_health:
+		health = max_health
+	if health < 0:
+		health = 0
 	health_changed.emit(health)
 
 func _process(_delta):
-	if Input.is_action_just_pressed("fire"):
+	if Input.is_action_just_pressed("fire")&&can_attack:
 		var b = bean.instantiate()
 		b.position = position
-		b.playerSpeed = SPEED
+		b.playerSpeed = speed
 
 		main.add_child(b)
-		change_health( - 2)
+		change_health( - attack_self_damage)
+		can_attack = false
+		get_tree().create_timer(attack_cooldown).timeout.connect(on_timer_timeout)
+
+func on_timer_timeout():
+	can_attack = true
 
 func _physics_process(_delta):
 	var movement = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 
-	velocity = movement * SPEED
+	velocity = movement * speed
 
 	if movement:
 		animation.play("WALK")
