@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 signal health_changed(new_health: int)
+signal reveal_position(new_position: Vector2)
 
 const bean = preload ("res://prefabs/Bean.tscn")
 
@@ -62,3 +63,6 @@ func _physics_process(_delta):
 		sprite.flip_h = false
 
 	move_and_slide()
+
+func _on_timer_reveal_position():
+	reveal_position.emit(global_position)
