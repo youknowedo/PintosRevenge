@@ -78,3 +78,8 @@ position = Vector2(0, 1)
 tilesOnly = false
 top_tile_collider = NodePath("../CollisionShape2D")
 bottom_tile_collider = NodePath("../CollisionShape2D2")
+
+[node name="RevealPositionTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="RevealPositionTimer" to="." method="_on_timer_reveal_position"]
