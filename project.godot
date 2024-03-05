@@ -21,8 +21,9 @@ boot_splash/minimum_display_time=500
 
 window/size/viewport_width=256
 window/size/viewport_height=240
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/stretch/scale_mode="integer"
 window/sdf/scale=1
 window/tooltip_position_offset=Vector2(8, 10)
 window/custom_image="res://sprites/cursor.png"

@@ -3,8 +3,6 @@ extends Sprite2D
 func _ready():
 	set_process_input(true)
 
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-
 func _notification(blah):
 	match blah:
 		NOTIFICATION_WM_MOUSE_EXIT:
