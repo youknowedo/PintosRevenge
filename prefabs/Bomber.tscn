@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bomptenogmh5d"]
 
-[ext_resource type="Script" path="res://scripts/Bomber.gd" id="1_jyx2g"]
+[ext_resource type="Script" path="res://scripts/Bomber/Bomber.gd" id="1_jyx2g"]
 [ext_resource type="Texture2D" uid="uid://bbwyq6weefgyi" path="res://sprites/bomber.png" id="1_mgi7n"]
 
 [sub_resource type="Animation" id="Animation_ob33c"]
@@ -64,6 +64,7 @@ size = Vector2(14, 5)
 
 [node name="Bomber" type="CharacterBody2D"]
 z_as_relative = false
+collision_mask = 0
 script = ExtResource("1_jyx2g")
 
 [node name="Bomber" type="Sprite2D" parent="."]
